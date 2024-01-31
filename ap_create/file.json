@@ -1,0 +1,32 @@
+{
+    "bookstore": {
+        "name": "My Bookstore",
+        "location": "123 Main St",
+        "books": [
+            {
+                "title": "The Great Gatsby",
+                "author": "F. Scott Fitzgerald",
+                "publisher": {
+                    "name": "Scribner",
+                    "year": 1925
+                }
+            },
+            {
+                "title": "To Kill a Mockingbird",
+                "author": "Harper Lee",
+                "publisher": {
+                    "name": "J.B. Lippincott & Co.",
+                    "year": 1960
+                }
+            },
+            {
+                "title": "1984",
+                "author": "George Orwell",
+                "publisher": {
+                    "name": "Secker & Warburg",
+                    "year": 1949
+                }
+            }
+        ]
+    }
+}
