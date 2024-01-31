@@ -1,6 +1,7 @@
 import random
 import json
 
+
 class JSONExplorer:
     def __init__(self, data):
         self.data = data
@@ -12,7 +13,9 @@ class JSONExplorer:
             for k, v in data.items():
                 new_path = path + [k]
                 if k == key:
-                    values.append({"location": self.pretty_location(new_path), "key_value": v})
+                    values.append(
+                        {"location": self.pretty_location(new_path), "key_value": v}
+                    )
                 elif isinstance(v, dict):
                     helper(v, key, new_path)
                 elif isinstance(v, list):
@@ -28,17 +31,18 @@ class JSONExplorer:
         for index, part in enumerate(location):
             if isinstance(part, str):
                 pretty_location += f"{part}"
-                if (index < len(location) - 1) and (isinstance(location[index + 1], int)):
+                if (index < len(location) - 1) and (
+                    isinstance(location[index + 1], int)
+                ):
                     pretty_location += f"[{location[index + 1]}]"
                 pretty_location += " -> " if part != location[-1] else ""
 
         return pretty_location
 
     def pretty_print(self):
-        """Pretty-prints the JSON data."""
         print(json.dumps(self.data, indent=2))
 
-    def find_all_values_UI(self, key:str):
+    def find_all_values_UI(self, key: str):
         values = self.find_all_values(key)
         if values:
             print(f"Found {len(values)} values:")
@@ -47,6 +51,7 @@ class JSONExplorer:
                 print(f"Value: {value['key_value']}")
         else:
             print(f"No values found for the key '{key}'.")
+
 
 if __name__ == "__main__":
     print(f"{'*' * 13}\nJSON Explorer\n{'*' * 13}")
