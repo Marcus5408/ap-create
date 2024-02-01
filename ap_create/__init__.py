@@ -1,8 +1,7 @@
 import json
-import colorama
-from colorama import Fore
+from colorama import Fore, init
 
-colorama.init()
+init()
 BLUE, GREEN, RED, YELLOW, RESET = (
     Fore.BLUE,
     Fore.GREEN,
