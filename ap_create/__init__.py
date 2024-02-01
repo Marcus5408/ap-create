@@ -1,5 +1,15 @@
-import random
 import json
+import colorama
+from colorama import Fore
+
+colorama.init()
+BLUE, GREEN, RED, YELLOW, RESET = (
+    Fore.BLUE,
+    Fore.GREEN,
+    Fore.RED,
+    Fore.YELLOW,
+    Fore.RESET,
+)
 
 
 class JSONExplorer:
@@ -45,7 +55,7 @@ class JSONExplorer:
     def find_all_values_UI(self, key: str):
         values = self.find_all_values(key)
         if values:
-            print(f"Found {len(values)} values:")
+            print(f"{GREEN}Found {len(values)} values:{BLUE}")
             for value in values:
                 print(f"{'-' * 20}\nLocation: {value['location']}")
                 print(f"Value: {value['key_value']}")
@@ -54,20 +64,22 @@ class JSONExplorer:
 
 
 if __name__ == "__main__":
-    print(f"{'*' * 13}\nJSON Explorer\n{'*' * 13}")
-    file_name = input("Enter the name of the json file (including the extension): ")
+    print(f"{YELLOW}{'*' * 13}\nJSON Explorer\n{'*' * 13}")
+    file_name = input(
+        f"{BLUE}Enter the name of the json file (including the extension): {GREEN}"
+    )
     try:
         with open(f"{__file__.replace('__init__.py', '')}{file_name}", "r") as f:
             data = json.load(f)
     except FileNotFoundError:
         print(
-            "Could not find the file. Please make sure the file is in the same directory as this script."
+            f"{RED}Could not find the file. The file needs to be in this script's directory."
         )
         exit()
     else:
-        print(f"'{file_name}' loaded successfully.")
+        print(f"{YELLOW}'{file_name}' loaded successfully.")
 
-    print("What would you like to do?")
+    print(f"{BLUE}What would you like to do?")
     menu_options = {
         "1": "Find all values of a key",
         "2": "Pretty-print the JSON data",
@@ -75,19 +87,19 @@ if __name__ == "__main__":
     }
 
     for key, value in menu_options.items():
-        print(f"[{key}] {value}")
+        print(f"{GREEN}[{key}] {BLUE}{value}")
 
-    main_menu_choice = input("Enter your choice: ")
+    main_menu_choice = input(f"{BLUE}Enter your choice: {GREEN}")
     while main_menu_choice not in menu_options.keys():
         print("Invalid choice. Please try again.")
-        main_menu_choice = input("Enter your choice: ")
+        main_menu_choice = input(f"{BLUE}Enter your choice: {GREEN}")
 
     if main_menu_choice == "1":
-        key = input("Enter the key: ")
+        key = input(f"{BLUE}Enter the key: {GREEN}")
         JSONExplorer(data).find_all_values_UI(key)
     elif main_menu_choice == "2":
         explorer = JSONExplorer(data)
         explorer.pretty_print()
     else:
-        print("Goodbye!")
+        print(f"{YELLOW}Goodbye!")
         exit()
